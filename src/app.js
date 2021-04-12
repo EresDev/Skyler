@@ -1,18 +1,9 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send([1,2,3]);
-});
-
-app.get('/help', (req, res) => {
-    res.send('Help');
-});
-
-app.get('/about', (req, res) => {
-    res.send('About');
-});
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/weather', (req, res) => {
     res.send('Weather');
