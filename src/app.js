@@ -39,6 +39,23 @@ app.get('/weather', (req, res) => {
     res.send('Weather');
 });
 
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        'errorMsg': 'Help article not found.',
+        'name': 'eresdev',
+        'title': '404'
+    });
+});
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        'errorMsg': 'Page not found.',
+        'name': 'eresdev',
+        'title': '404'
+    });
+});
+
+
 app.listen(3000, () => {
     console.log('Express server listening at port 3000');
 });
