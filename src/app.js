@@ -36,7 +36,18 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
-    res.send('Weather');
+    if (!req.query.address) {
+        res.send({
+            'error': 'You must provide an address'
+        });
+        return;
+    }
+    console.log(req.query.address);
+    res.send({
+        forecast: 'This is the forecast',
+        location: 'Philadelphia',
+        address: req.query.address
+    });
 });
 
 app.get('/help/*', (req, res) => {
