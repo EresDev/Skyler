@@ -18,22 +18,22 @@ hbs.registerPartials(partialsPath);
 
 app.get('', (req, res) => {
     res.render('index', {
-        title: 'Weather app',
-        name: 'Eresdev'
+        title: 'Skyler',
+        name: 'EresDev'
     });
 });
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About',
-        name: 'Eresdev'
+        name: 'EresDev'
     });
 });
 
 app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
-        name: 'Eresdev',
+        name: 'EresDev',
         helpText: 'This is some helpful text.'
     });
 });
@@ -83,7 +83,7 @@ app.get('/weather', (req, res) => {
 app.get('/help/*', (req, res) => {
     res.render('404', {
         'errorMsg': 'Help article not found.',
-        'name': 'eresdev',
+        'name': 'EresDev',
         'title': '404'
     });
 });
@@ -91,7 +91,7 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
     res.render('404', {
         'errorMsg': 'Page not found.',
-        'name': 'eresdev',
+        'name': 'EresDev',
         'title': '404'
     });
 });
