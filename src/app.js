@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
+const geocode = require('./api-consumers/geocode');
+const forecast = require('./api-consumers/forecast');
 
+require('dotenv').config();
 const app = express();
 
 const staticContentPath = path.join(__dirname, '../public');
@@ -42,12 +45,39 @@ app.get('/weather', (req, res) => {
         });
         return;
     }
-    console.log(req.query.address);
-    res.send({
-        forecast: 'This is the forecast',
-        location: 'Philadelphia',
-        address: req.query.address
+
+    geocode(req.query.address, (error, {latitude, longitude, placename} = {}) => {
+        if (error) {
+            res.send({
+                'error': error
+            });
+            return;
+        }
+
+        forecast(latitude, longitude, (error, data) => {
+            if (error) {
+                res.send({
+                    'error': error
+                });
+                return;
+            }
+            console.log(placename);
+            console.log(data);
+
+            res.send({
+                forecast: data,
+                location: placename,
+                address: req.query.address
+            });
+        });
     });
+
+    // console.log(req.query.address);
+    // res.send({
+    //     forecast: 'This is the forecast',
+    //     location: 'Philadelphia',
+    //     address: req.query.address
+    // });
 });
 
 app.get('/help/*', (req, res) => {
