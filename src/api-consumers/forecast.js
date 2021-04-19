@@ -12,7 +12,7 @@ const forecast = (latitude, longitude, callback) => {
             callback('Unable to find location for latlong.', undefined);
         }else {
             const tempC = body.main.temp;
-            callback(undefined, 'It is currently '+tempC+' degree out.');
+            callback(undefined, 'It is currently '+tempC+' degree celsius out.');
         }
     });
 }
